@@ -1,6 +1,6 @@
 #!/usr/bin/ksh93
 ####################################################################################
-# Storwize-FlashCopyC-p012_bak2.ksh - Storwize Storage FlashCopy (Snapshot) Script
+# Storwize-FlashCopyC-p012_restore1.ksh - Storwize Storage FlashCopy (Snapshot) Script
 # Written By: TonyW {TWx} - https://github.com/TonyWx/Storwize
 # Version 7.1.0.0
 # Update 2019/12/15 -- New Release on AIX 7200-03-02-1845
@@ -16,10 +16,10 @@
 ####################################################################################
 
 # Script Name
-ScriptName='Storwize-FlashCopyC-p012_bak2.ksh'
+ScriptName='Storwize-FlashCopyC-p012_restore1.ksh'
 
 # Consistency group Name
-ConsistGrp=p012_bak2
+ConsistGrp=p012_restore1
 
 # Command prefix (ex: username@ip.address)
 SshPre='/usr/bin/ssh pbancs01@192.168.200.6 '
@@ -44,7 +44,7 @@ print
 print $PL
 print "Start FlashCopy --"`date +%Y-%m-%d-%H:%M:%S`"--"
 print
-$SshPre "startfcconsistgrp -prep $ConsistGrp"
+$SshPre "startfcconsistgrp -prep -restore $ConsistGrp"
 sleep 1
 print "Current Status = "`$SshPre lsfcconsistgrp -nohdr -filtervalue name=$ConsistGrp | awk '{print $3}'`
 print "Script Finished!!"
