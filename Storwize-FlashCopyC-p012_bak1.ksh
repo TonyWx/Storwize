@@ -44,7 +44,7 @@ print
 print $PL
 print "Start FlashCopy --"`date +%Y-%m-%d-%H:%M:%S`"--"
 print
-$SshPre "startfcconsistgrp -prep -restore testvg"
+$SshPre "startfcconsistgrp -prep testvg"
 sleep 1
 print "Current Status = "`$SshPre lsfcconsistgrp -nohdr -filtervalue name=$ConsistGrp | awk '{print $3}'`
 print "Script Finished!!"
