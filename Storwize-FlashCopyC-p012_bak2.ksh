@@ -51,3 +51,5 @@ print "Script Finished!!"
 print
 print $PL
 print
+
+exit 0
