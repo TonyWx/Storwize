@@ -16,10 +16,10 @@
 ####################################################################################
 
 # Script Name
-ScriptName='Storwize-FlashCopyC-p012_bak.ksh'
+ScriptName='Storwize-FlashCopyC-p012_bak1.ksh'
 
 # Consistency group Name
-ConsistGrp=p012_bak
+ConsistGrp=p012_bak1
 
 # Command prefix (ex: username@ip.address)
 SshPre='/usr/bin/ssh pbancs01@192.168.200.6 '
