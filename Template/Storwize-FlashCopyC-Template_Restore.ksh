@@ -1,6 +1,6 @@
 #!/usr/bin/ksh93
 ####################################################################################
-# Storwize-FlashCopyC-Template.ksh - Storwize Storage FlashCopy (Snapshot) Script
+# Storwize-FlashCopyC-Template_Restore.ksh - Storwize Storage FlashCopy (Snapshot) Script
 # Written By: TonyW {TWx} - https://github.com/TonyWx/Storwize
 # Version 7.1.0.0
 # Update 2019/12/15 -- New Release on AIX 7200-03-02-1845
@@ -45,7 +45,7 @@ fi
 # Start FlashCopy
 print $PL
 print "Start FlashCopy --"`date +%Y-%m-%d-%H:%M:%S`"--"; print
-FStatus=`$SshPre "startfcconsistgrp -prep $ConsistGrp" 2>&1`
+FStatus=`$SshPre "startfcconsistgrp -prep -restore $ConsistGrp" 2>&1`
 sleep 1
 if [ ! "$FStatus" = "" ]; then
   print $FStatus; print; print "!!  FlashCopy Abort  !!"; print; exit 1
