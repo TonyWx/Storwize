@@ -15,9 +15,6 @@
 # volumes at the moment that the command is started.
 ####################################################################################
 
-# Script Name
-ScriptName='Storwize-FlashCopyC-p012_bak2.ksh'
-
 # Consistency group Name
 ConsistGrp=p012_bak2
 
@@ -25,6 +22,7 @@ ConsistGrp=p012_bak2
 SshPre='/usr/bin/ssh pbancs01@192.168.200.6 '
 
 # Information
+ScriptName=$(basename $0)
 PL="------------------------------------------------------------"
 print
 print "Start Storwize Script"
@@ -35,21 +33,26 @@ print "Consistency Group \t= $ConsistGrp"
 print $PL
 
 # Check ConsisGrp
-print "Check Consistency Group Status"
-print
-print "Status = "`$SshPre lsfcconsistgrp -nohdr -filtervalue name=$ConsistGrp | awk '{print $3}'`
-print
+print "Check Consistency Group Status";print
+BStatus=`$SshPre lsfcconsistgrp -nohdr -filtervalue name=$ConsistGrp | awk '{print $3}'`
+if [ ! "$BStatus" = "" ]; then
+  print "Current Status = $BStatus"
+else
+  print "!!  Status Error, Please Check Consistency Group [$ConsistGrp]  !!"
+  print; exit 1
+fi
 
 # Start FlashCopy
 print $PL
-print "Start FlashCopy --"`date +%Y-%m-%d-%H:%M:%S`"--"
-print
-$SshPre "startfcconsistgrp -prep $ConsistGrp"
+print "Start FlashCopy --"`date +%Y-%m-%d-%H:%M:%S`"--"; print
+FStatus=`$SshPre "startfcconsistgrp -prep $ConsistGrp" 2>&1`
 sleep 1
-print "Current Status = "`$SshPre lsfcconsistgrp -nohdr -filtervalue name=$ConsistGrp | awk '{print $3}'`
+if [ ! "$FStatus" = "" ]; then
+  print $FStatus; print; print "!!  FlashCopy Abort  !!"; print; exit 1
+fi
+GStatus=`$SshPre lsfcconsistgrp -nohdr -filtervalue name=$ConsistGrp | awk '{print $3}'`
+print "Immediate Status = $GStatus"
 print "Script Finished!!"
-print
-print $PL
-print
+print $PL; print
 
 exit 0
