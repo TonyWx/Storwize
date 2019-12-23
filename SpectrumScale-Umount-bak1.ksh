@@ -18,14 +18,14 @@ fi
 
 export PATH=/usr/lpp/mmfs/bin:/usr/sbin:$PATH
 # Filesystem Name p012bandvol p012redovol
-# Fuser Point : # mmdsh -N all fuser -xkuc /oradata/p012bank /oradata/p012redo
+# Fuser Point : # mmdsh -N all fuser -xkuc /oradata/p012band /oradata/p012redo
 
 # Information
 ScriptName=$(basename $0)
 PL="------------------------------------------------------------"
 print
 print "Identifies & Clear processes using a filesystem."
-mmdsh -N all fuser -xkuc /oradata/p012bank /oradata/p012redo
+mmdsh -N all fuser -xkuc /oradata/p012band /oradata/p012redo
 print "Start Filesystem Umount."
 print $PL
 print "Start Time \t\t= "`date +%Y-%m-%d-%H:%M:%S`
